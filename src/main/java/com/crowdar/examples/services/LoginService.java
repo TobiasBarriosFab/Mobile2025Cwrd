@@ -1,25 +1,24 @@
 package com.crowdar.examples.services;
 
 import com.crowdar.core.actions.MobileActionManager;
-import com.crowdar.driver.DriverManager;
 import com.crowdar.examples.constants.LoginConstants;
-import org.testng.Assert;
 
-/**
- * This class contains the business logic.
- * We can have querys, requests or steps to do certain things (how to log into the app).
- * If we need to only complete a field or click a button, we can put it in the steps.
- */
-public class LoginService {
-
-    public static void doLogin(String email, String password){
-        MobileActionManager.setInput(LoginConstants.EMAIL_INPUT_LOCATOR, email);
-        MobileActionManager.setInput(LoginConstants.PASSWORD_INPUT_LOCATOR, password);
-        MobileActionManager.click(LoginConstants.SIGN_IN_BUTTON_LOCATOR);
+public class LoginService extends MobileActionManager {
+    public static void clickMenu(){
+        waitPresence(LoginConstants.BURGER_ITEM_ACCESSIBILITY_ID).isDisplayed();
+        click(LoginConstants.BURGER_ITEM_ACCESSIBILITY_ID);
+    }
+    public static void clickLoginItemMenu(){
+        waitPresence(LoginConstants.ITEM_MENU_LOGIN_ACCESSIBILITY_ID).isDisplayed();
+        click(LoginConstants.ITEM_MENU_LOGIN_ACCESSIBILITY_ID);
+    }
+    public static void Logueo(String pUsuario, String pPass){
+        MobileActionManager.setInput(LoginConstants.INPUT_USERNAME_ID, pUsuario);
+        MobileActionManager.setInput(LoginConstants.INPUT_PASSWORD_ID, pPass);
+    }
+    public static void clickBotonLogin(){
+        waitPresence(LoginConstants.BOTON_LOGIN_ACCESSIBILITY_ID).isDisplayed();
+        click(LoginConstants.BOTON_LOGIN_ACCESSIBILITY_ID);
     }
 
-    public static void isViewLoaded(){
-        MobileActionManager.waitVisibility(LoginConstants.SIGN_UP_BUTTON_LOCATOR);
-        Assert.assertTrue(MobileActionManager.isVisible(LoginConstants.EMAIL_INPUT_LOCATOR), LoginConstants.VIEW_NOT_DISPLAYED_MESSAGE);
-    }
 }
